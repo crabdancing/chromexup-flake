@@ -9,7 +9,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, chromexup }:
-    flake-utils.lib.eachDefaultSystem (system:
+    (flake-utils.lib.eachDefaultSystem (system:
       let
         # Prepare the Python package using the setup.py in the chromexup repository
         pkgs = import nixpkgs {
@@ -27,11 +27,6 @@
             })
           ];
         };
-        chromexupModule = { config, ... }: {
-            imports = [
-              ./module.nix
-            ];
-          };
       in
       {
         # Provide Nix packages and apps using the package built above
@@ -42,6 +37,15 @@
         };
         defaultPackage = pkgs.chromexup;
 
+      })) // (let
+        chromexupModule = { config, ... }: {
+          imports = [
+            ./module.nix
+          ];
+        };
+
+      in {
+      
         homeManagerModules = {
           default = chromexupModule;
           chromexup = chromexupModule;
