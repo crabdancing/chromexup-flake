@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ chromexup-src }: { config, lib, pkgs, ... }:
 
 with lib;
 
@@ -43,7 +43,7 @@ in {
     #   overlay
     # ];
     home.packages = [
-      (pkgs.callPackage ./pkg.nix {})
+      (pkgs.callPackage ./pkg.nix { inherit chromexup-src; })
     ];
     xdg.configFile."chromexup/config.ini".source = iniFormat.generate "config.ini" {
       main = {

@@ -32,10 +32,11 @@
         #     ./module.nix
         #   ];
         # };
+        module = import ./module.nix { inherit chromexup-src; };
       in {      
         homeManagerModules = {
-          default = ./module.nix;
-          chromexup = ./module.nix;
+          default = module;
+          chromexup = module;
         };
       });
 }
