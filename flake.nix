@@ -27,25 +27,12 @@
         packages.default = chromexup;
 
       })) // (let
-
         homeModule = { config, ... }: {
           imports = [
             ./module.nix
           ];
         };
-        # module = { ... }: {
-        #   overlays = [ overlay ];
-        # };
-      in {
-        # overlays = {
-        #   default = overlay;
-        #   chromexup = overlay;
-        # };
-        # nixosModules = {
-        #   default = module;
-        #   chromexup = module;
-        # };
-      
+      in {      
         homeManagerModules = {
           default = homeModule;
           chromexup = homeModule;
