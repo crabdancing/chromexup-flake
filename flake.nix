@@ -31,12 +31,13 @@
 
         overlay = import ./overlay.nix { inherit chromexup-src; };
         homeModule = { config, ... }: {
-          overlays = [ overlay ];
           imports = [
             ./module.nix
           ];
         };
-        module = {}: {};
+        module = {}: {
+          overlays = [ overlay ];
+        };
       in {
         nixosModules = {
           defualt = module;
