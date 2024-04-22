@@ -11,11 +11,9 @@
   outputs = { self, nixpkgs, flake-utils, chromexup-src }:
     (flake-utils.lib.eachDefaultSystem (system:
       let
-        overlay = import ./overlay.nix { inherit chromexup-src; };
         # Prepare the Python package using the setup.py in the chromexup repository
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ overlay ];
         };
         chromexup = pkgs.callPackage ./pkg.nix;
       in
