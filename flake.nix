@@ -27,11 +27,6 @@
         packages.default = chromexup;
 
       })) // (let
-        # homeModule = { config, ... }: {
-        #   imports = [
-        #     ./module.nix
-        #   ];
-        # };
         module = import ./module.nix { inherit chromexup-src; };
       in {      
         homeManagerModules = {

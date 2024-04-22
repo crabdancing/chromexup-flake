@@ -39,9 +39,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # nixpkgs.overlays = [
-    #   overlay
-    # ];
     home.packages = [
       package
     ];
@@ -54,7 +51,7 @@ in {
       extensions = cfg.extensions;
     };
 
-    systemd.user.timers.chromexupTimer = {
+    systemd.user.timers.chromexup  = {
       Unit = {
         Description = "Run chromexup daily";
       };
