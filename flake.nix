@@ -23,31 +23,30 @@
         # Provide Nix packages and apps using the package built above
         packages.chromexup = chromexup;
         apps.chromexup = pkgs.lib.mkApp {
-          inherit (pkgs.chromexup) drv;
-          program = "${pkgs.chromexup}/bin/chromexup";
+          inherit (chromexup) drv;
+          program = "${chromexup}/bin/chromexup";
         };
         packages.default = chromexup;
 
       })) // (let
 
-        overlay = import ./overlay.nix { inherit chromexup-src; };
         homeModule = { config, ... }: {
           imports = [
-            (import ./module.nix { inherit overlay; })
+            ./module.nix
           ];
         };
-        module = { ... }: {
-          overlays = [ overlay ];
-        };
+        # module = { ... }: {
+        #   overlays = [ overlay ];
+        # };
       in {
-        overlays = {
-          default = overlay;
-          chromexup = overlay;
-        };
-        nixosModules = {
-          default = module;
-          chromexup = module;
-        };
+        # overlays = {
+        #   default = overlay;
+        #   chromexup = overlay;
+        # };
+        # nixosModules = {
+        #   default = module;
+        #   chromexup = module;
+        # };
       
         homeManagerModules = {
           default = homeModule;
