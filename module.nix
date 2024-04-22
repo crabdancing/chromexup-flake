@@ -7,7 +7,6 @@ let
   iniFormat = pkgs.formats.ini { };
 
 in {
-  overlays = [];
   options.programs.chromexup = {
     enable = mkEnableOption "chromexup";
 
@@ -40,6 +39,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [];
     hm.programs = [
       pkgs.chromexup
     ];
