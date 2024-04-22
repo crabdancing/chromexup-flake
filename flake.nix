@@ -40,7 +40,7 @@
         };
       in {
         nixosModules = {
-          defualt = module;
+          default = module;
           chromexup = module;
         };
       
