@@ -7,8 +7,9 @@ let
   iniFormat = pkgs.formats.ini { };
 
 in {
-  # options.programs.chromexup = {
-  #   enable = mkEnableOption "chromexup";
+  options.programs.chromexup = {
+    enable = mkEnableOption "chromexup";
+  };
 
   #   branding = mkOption {
   #     type = types.enum ["inox" "iridium" "chromium"];

@@ -27,15 +27,15 @@
         packages.default = chromexup;
 
       })) // (let
-        homeModule = { config, ... }: {
-          # imports = [
-          #   ./module.nix
-          # ];
-        };
+        # homeModule = { config, ... }: {
+        #   imports = [
+        #     ./module.nix
+        #   ];
+        # };
       in {      
         homeManagerModules = {
-          default = homeModule;
-          chromexup = homeModule;
+          default = ./module.nix;
+          chromexup = ./module.nix;
         };
       });
 }
