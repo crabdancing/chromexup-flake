@@ -2,41 +2,40 @@
   description = "A flake for building chromexup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    chromexup = {
-      url = "github:xsmile/chromexup";
-      flake = false;
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
+    chromexup.url = "github:xsmile/chromexup";
+    chromexup.flake = false;
   };
 
-  outputs = { self, nixpkgs, chromexup, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, chromexup }:
     flake-utils.lib.eachDefaultSystem (system:
       let
+        # Prepare the Python package using the setup.py in the chromexup repository
         pkgs = import nixpkgs {
           inherit system;
+          overlays = [
+            (self: super: {
+              chromexup = super.python3Packages.buildPythonApplication {
+                pname = "chromexup";
+                version = "unstable"; # Use 'unstable' as there is no version in the repo
+                src = chromexup;
+                propagatedBuildInputs = with super.python3Packages; [ requests ];
+                # You may need to add more Python dependencies depending on the actual needs
+                # You could also override 'doCheck' and other attributes as required
+              };
+            })
+          ];
         };
-        lib = pkgs.lib;
-      in {
-        packages.chromexup = pkgs.stdenv.mkDerivation {
-          pname = "chromexup";
-          version = "unstable";
-          src = chromexup;
-          buildInputs = with pkgs; [ makeWrapper ];
-
-          installPhase = ''
-            mkdir -p $out/bin
-            cp -r $src/* $out
-            wrapProgram $out/chromexup \
-              --prefix PATH : ${lib.makeBinPath [ pkgs.bash ]}
-          '';
+      in
+      {
+        # Provide Nix packages and apps using the package built above
+        packages.chromexup = pkgs.chromexup;
+        apps.chromexup = pkgs.lib.mkApp {
+          inherit (pkgs.chromexup) drv;
+          program = "${pkgs.chromexup}/bin/chromexup";
         };
-
-        defaultPackage = self.packages.${system}.chromexup;
-        apps.chromexup = flake-utils.lib.mkApp {
-          drv = self.packages.${system}.chromexup;
-        };
-      }
-    );
+        defaultPackage = pkgs.chromexup;
+      });
 }
 
