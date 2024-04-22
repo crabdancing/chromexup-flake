@@ -17,15 +17,16 @@
           inherit system;
           overlays = [ overlay ];
         };
+        chromexup = pkgs.callPackage ./pkg.nix;
       in
       {
         # Provide Nix packages and apps using the package built above
-        packages.chromexup = pkgs.chromexup;
+        packages.chromexup = chromexup;
         apps.chromexup = pkgs.lib.mkApp {
           inherit (pkgs.chromexup) drv;
           program = "${pkgs.chromexup}/bin/chromexup";
         };
-        packages.default = pkgs.chromexup;
+        packages.default = chromexup;
 
       })) // (let
 
