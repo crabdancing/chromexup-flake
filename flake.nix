@@ -4,28 +4,18 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     flake-utils.url = "github:numtide/flake-utils";
-    chromexup.url = "github:xsmile/chromexup";
-    chromexup.flake = false;
+    chromexup-src.url = "github:xsmile/chromexup";
+    chromexup-src.flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, chromexup }:
+  outputs = { self, nixpkgs, flake-utils, chromexup-src }:
     (flake-utils.lib.eachDefaultSystem (system:
       let
+        overlay = import ./overlay.nix { inherit chromexup-src; };
         # Prepare the Python package using the setup.py in the chromexup repository
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [
-            (self: super: {
-              chromexup = super.python3Packages.buildPythonApplication {
-                pname = "chromexup";
-                version = "unstable"; # Use 'unstable' as there is no version in the repo
-                src = chromexup;
-                propagatedBuildInputs = with super.python3Packages; [ requests ];
-                # You may need to add more Python dependencies depending on the actual needs
-                # You could also override 'doCheck' and other attributes as required
-              };
-            })
-          ];
+          overlays = [ overlay ];
         };
       in
       {
@@ -38,17 +28,19 @@
         defaultPackage = pkgs.chromexup;
 
       })) // (let
-        chromexupModule = { config, ... }: {
+
+        overlay = import ./overlay.nix { inherit chromexup-src; };
+        module = { config, ... }: {
+          overlays = [ overlay ];
           imports = [
             ./module.nix
           ];
         };
-
       in {
       
         homeManagerModules = {
-          default = chromexupModule;
-          chromexup = chromexupModule;
+          default = module;
+          chromexup = module;
         };
       });
 }
