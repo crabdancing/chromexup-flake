@@ -45,7 +45,7 @@ in {
     programs = [
       (pkgs.callPackage ./pkg.nix)
     ];
-    xdg.configFile.".config/chromexup/config.ini".text = (iniFormat.generate "config.ini" {
+    xdg.configFile."chromexup/config.ini".source = (iniFormat.generate "config.ini" {
       main = {
         branding = cfg.branding;
         parallel_downloads = toString cfg.parallelDownloads;
