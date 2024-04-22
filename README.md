@@ -45,3 +45,6 @@ home-manager.red.programs.chromexup = {
 ```
 
 This will also automatically enable a systemd service & timer, so it will automatically run daily!
+
+
+inb4 Google makes all of this work useless in June with their MV3 garbage :sob:
