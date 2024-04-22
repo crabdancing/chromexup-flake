@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "chromexup": {
+    "chromexup-src": {
       "flake": false,
       "locked": {
         "lastModified": 1697727980,
@@ -52,7 +52,7 @@
     },
     "root": {
       "inputs": {
-        "chromexup": "chromexup",
+        "chromexup-src": "chromexup-src",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       }

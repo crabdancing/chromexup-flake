@@ -30,17 +30,23 @@
       })) // (let
 
         overlay = import ./overlay.nix { inherit chromexup-src; };
-        module = { config, ... }: {
+        homeModule = { config, ... }: {
           overlays = [ overlay ];
           imports = [
             ./module.nix
           ];
         };
+        module = {}: {};
       in {
+        nixosModules = {
+          defualt = module;
+          chromexup = module;
+        };
+        nixosModule = module;
       
         homeManagerModules = {
-          default = module;
-          chromexup = module;
+          default = homeModule;
+          chromexup = homeModule;
         };
       });
 }
