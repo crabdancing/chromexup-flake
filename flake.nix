@@ -15,7 +15,7 @@
         pkgs = import nixpkgs {
           inherit system;
         };
-        chromexup = pkgs.callPackage ./pkg.nix;
+        chromexup = pkgs.callPackage ./pkg.nix { inherit  chromexup-src; };
       in
       {
         # Provide Nix packages and apps using the package built above
