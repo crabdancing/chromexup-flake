@@ -28,9 +28,9 @@
 
       })) // (let
         homeModule = { config, ... }: {
-          imports = [
-            ./module.nix
-          ];
+          # imports = [
+          #   ./module.nix
+          # ];
         };
       in {      
         homeManagerModules = {
