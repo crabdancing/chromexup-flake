@@ -35,18 +35,18 @@
             (import ./module.nix { inherit overlay; })
           ];
         };
-        # module = { ... }: {
-        #   overlays = [ overlay ];
-        # };
+        module = { ... }: {
+          overlays = [ overlay ];
+        };
       in {
         overlays = {
           default = overlay;
           chromexup = overlay;
         };
-        # nixosModules = {
-        #   default = module;
-        #   chromexup = module;
-        # };
+        nixosModules = {
+          default = module;
+          chromexup = module;
+        };
       
         homeManagerModules = {
           default = homeModule;

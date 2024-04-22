@@ -1,4 +1,4 @@
-{ overlay }: { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -39,11 +39,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [
-      overlay
-    ];
+    # nixpkgs.overlays = [
+    #   overlay
+    # ];
     hm.programs = [
-      pkgs.chromexup
+      (pkgs.callPackage ./pkg.nix)
     ];
     hm.xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
       main = {
