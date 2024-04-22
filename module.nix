@@ -7,36 +7,36 @@ let
   iniFormat = pkgs.formats.ini { };
 
 in {
-  options.programs.chromexup = {
-    enable = mkEnableOption "chromexup";
+  # options.programs.chromexup = {
+  #   enable = mkEnableOption "chromexup";
 
-    branding = mkOption {
-      type = types.enum ["inox" "iridium" "chromium"];
-      default = "chromium";
-      description = "Name of the browser user data directory.";
-    };
+  #   branding = mkOption {
+  #     type = types.enum ["inox" "iridium" "chromium"];
+  #     default = "chromium";
+  #     description = "Name of the browser user data directory.";
+  #   };
 
-    parallelDownloads = mkOption {
-      type = types.int;
-      default = 4;
-      description = "Parallel download threads.";
-    };
+  #   parallelDownloads = mkOption {
+  #     type = types.int;
+  #     default = 4;
+  #     description = "Parallel download threads.";
+  #   };
 
-    removeOrphans = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Remove extensions not defined in the extension section.";
-    };
+  #   removeOrphans = mkOption {
+  #     type = types.bool;
+  #     default = false;
+  #     description = "Remove extensions not defined in the extension section.";
+  #   };
 
-    extensions = mkOption {
-      type = types.attrsOf types.str;
-      default = {};
-      description = "List of browser extensions to manage.";
-      example = {
-        HTTPSEverywhere = "gcbommkclmclpchllfjekcdonpmejbdp";
-      };
-    };
-  };
+  #   extensions = mkOption {
+  #     type = types.attrsOf types.str;
+  #     default = {};
+  #     description = "List of browser extensions to manage.";
+  #     example = {
+  #       HTTPSEverywhere = "gcbommkclmclpchllfjekcdonpmejbdp";
+  #     };
+  #   };
+  # };
 
   config = mkIf cfg.enable {
     # nixpkgs.overlays = [
