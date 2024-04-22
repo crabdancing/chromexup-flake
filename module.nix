@@ -45,14 +45,14 @@ in {
     programs = [
       (pkgs.callPackage ./pkg.nix)
     ];
-    xdg.configFile."chromexup/config.ini".source = (iniFormat.generate "config.ini" {
-      main = {
-        branding = cfg.branding;
-        parallel_downloads = toString cfg.parallelDownloads;
-        remove_orphans = if cfg.removeOrphans then "True" else "False";
-      };
-      extensions = cfg.extensions;
-    });
+    # xdg.configFile."chromexup/config.ini".source = iniFormat.generate "config.ini" {
+    #   main = {
+    #     branding = cfg.branding;
+    #     parallel_downloads = toString cfg.parallelDownloads;
+    #     remove_orphans = if cfg.removeOrphans then "True" else "False";
+    #   };
+    #   extensions = cfg.extensions;
+    # };
   };
 }
 
