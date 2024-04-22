@@ -7,6 +7,7 @@ let
   iniFormat = pkgs.formats.ini { };
 
 in {
+  overlays = [];
   options.programs.chromexup = {
     enable = mkEnableOption "chromexup";
 
