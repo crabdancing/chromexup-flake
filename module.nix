@@ -5,7 +5,7 @@ with lib;
 let
   cfg = config.programs.chromexup;
   iniFormat = pkgs.formats.ini { };
-
+  package = pkgs.callPackage ./pkg.nix { inherit chromexup-src; };
 in {
   options.programs.chromexup = {
     enable = mkEnableOption "chromexup";
@@ -43,7 +43,7 @@ in {
     #   overlay
     # ];
     home.packages = [
-      (pkgs.callPackage ./pkg.nix { inherit chromexup-src; })
+      package
     ];
     xdg.configFile."chromexup/config.ini".source = iniFormat.generate "config.ini" {
       main = {
@@ -79,7 +79,7 @@ in {
 
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.chromexup}/bin/chromexup";
+        ExecStart = "${package}/bin/chromexup";
       };
     };
   };
