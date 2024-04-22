@@ -70,7 +70,6 @@ in {
     };
 
     systemd.user.services.chromexup = {
-      enable = true;
       Unit = {
         Description = "External extension updater for Chromium based browsers";
         After = [ "network-online.target" "psd-resync.service" ];
