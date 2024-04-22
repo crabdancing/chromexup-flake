@@ -53,6 +53,35 @@ in {
       };
       extensions = cfg.extensions;
     };
+
+    systemd.user.timers.chromexupTimer = {
+      Unit = {
+        Description = "Run chromexup daily";
+      };
+
+      Timer = {
+        OnCalendar = "daily";
+        Persistent = true;
+      };
+
+      Install = {
+        WantedBy = [ "timers.target" ];
+      };
+    };
+
+    systemd.user.services.chromexup = {
+      enable = true;
+      Unit = {
+        Description = "External extension updater for Chromium based browsers";
+        After = [ "network-online.target" "psd-resync.service" ];
+        Wants = [ "network-online.target" ];
+      };
+
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.chromexup}/bin/chromexup";
+      };
+    };
   };
 }
 

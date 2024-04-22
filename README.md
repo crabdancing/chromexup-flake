@@ -43,3 +43,5 @@ home-manager.red.programs.chromexup = {
   };
 };
 ```
+
+This will also automatically enable a systemd service & timer, so it will automatically run daily!
