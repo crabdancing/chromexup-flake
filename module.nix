@@ -39,6 +39,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    hm.programs = [
+      pkgs.chromexup
+    ];
     hm.xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
       main = {
         branding = cfg.branding;
