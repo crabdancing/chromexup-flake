@@ -27,6 +27,11 @@
             })
           ];
         };
+        chromexupModule = { config, ... }: {
+            imports = [
+              ./module.nix
+            ];
+          };
       in
       {
         # Provide Nix packages and apps using the package built above
@@ -36,6 +41,11 @@
           program = "${pkgs.chromexup}/bin/chromexup";
         };
         defaultPackage = pkgs.chromexup;
+
+        homeManagerModules = {
+          default = chromexupModule;
+          chromexup = chromexupModule;
+        };
       });
 }
 
