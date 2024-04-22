@@ -35,7 +35,7 @@
             ./module.nix
           ];
         };
-        module = {}: {
+        module = { ... }: {
           overlays = [ overlay ];
         };
       in {
