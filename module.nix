@@ -43,7 +43,7 @@ in {
     #   overlay
     # ];
     home.packages = [
-      (pkgs.callPackage ./pkg.nix)
+      (pkgs.callPackage ./pkg.nix {})
     ];
     xdg.configFile."chromexup/config.ini".source = iniFormat.generate "config.ini" {
       main = {
