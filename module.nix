@@ -39,7 +39,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
+    hm.xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
       main = {
         branding = cfg.branding;
         parallel_downloads = toString cfg.parallelDownloads;
