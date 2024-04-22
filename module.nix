@@ -52,6 +52,7 @@ in {
     };
 
     systemd.user.timers.chromexup  = {
+      enable = true;
       Unit = {
         Description = "Run chromexup daily";
       };
