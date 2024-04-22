@@ -25,7 +25,7 @@
           inherit (pkgs.chromexup) drv;
           program = "${pkgs.chromexup}/bin/chromexup";
         };
-        defaultPackage = pkgs.chromexup;
+        packages.default = pkgs.chromexup;
 
       })) // (let
 
@@ -42,7 +42,6 @@
           defualt = module;
           chromexup = module;
         };
-        nixosModule = module;
       
         homeManagerModules = {
           default = homeModule;
