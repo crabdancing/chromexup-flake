@@ -32,7 +32,7 @@
         overlay = import ./overlay.nix { inherit chromexup-src; };
         homeModule = { config, ... }: {
           imports = [
-            ./module.nix
+            (import ./module.nix { inherit overlay; })
           ];
         };
         # module = { ... }: {

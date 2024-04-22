@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ overlay }: { config, lib, pkgs, ... }:
 
 with lib;
 
@@ -39,7 +39,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [];
+    nixpkgs.overlays = [
+      overlay
+    ];
     hm.programs = [
       pkgs.chromexup
     ];
