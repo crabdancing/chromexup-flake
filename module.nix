@@ -42,17 +42,17 @@ in {
     # nixpkgs.overlays = [
     #   overlay
     # ];
-    home-manager.programs = [
+    programs = [
       (pkgs.callPackage ./pkg.nix)
     ];
-    home-manager.xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
+    xdg.configFile.".config/chromexup/config.ini".text = (iniFormat.generate "config.ini" {
       main = {
         branding = cfg.branding;
         parallel_downloads = toString cfg.parallelDownloads;
         remove_orphans = if cfg.removeOrphans then "True" else "False";
       };
       extensions = cfg.extensions;
-    };
+    });
   };
 }
 
