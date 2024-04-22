@@ -42,10 +42,10 @@ in {
     # nixpkgs.overlays = [
     #   overlay
     # ];
-    programs = [
+    home-manager.programs = [
       (pkgs.callPackage ./pkg.nix)
     ];
-    xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
+    home-manager.xdg.configFile.".config/chromexup/config.ini".text = iniFormat.generate "config.ini" {
       main = {
         branding = cfg.branding;
         parallel_downloads = toString cfg.parallelDownloads;
