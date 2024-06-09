@@ -1,11 +1,13 @@
-{ chromexup-src }: { config, lib, pkgs, ... }:
-
-with lib;
-
-let
+{chromexup-src}: {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.programs.chromexup;
-  iniFormat = pkgs.formats.ini { };
-  package = pkgs.callPackage ./pkg.nix { inherit chromexup-src; };
+  iniFormat = pkgs.formats.ini {};
+  package = pkgs.callPackage ./pkg.nix {inherit chromexup-src;};
 in {
   options.programs.chromexup = {
     enable = mkEnableOption "chromexup";
@@ -24,7 +26,8 @@ in {
 
     removeOrphans = mkOption {
       type = types.bool;
-      default = false;
+      # should do this by default to have more nixos-like behavior
+      default = true;
       description = "Remove extensions not defined in the extension section.";
     };
 
@@ -46,12 +49,15 @@ in {
       main = {
         branding = cfg.branding;
         parallel_downloads = toString cfg.parallelDownloads;
-        remove_orphans = if cfg.removeOrphans then "True" else "False";
+        remove_orphans =
+          if cfg.removeOrphans
+          then "True"
+          else "False";
       };
       extensions = cfg.extensions;
     };
 
-    systemd.user.timers.chromexup  = {
+    systemd.user.timers.chromexup = {
       Unit = {
         Description = "Run chromexup daily";
       };
@@ -62,15 +68,15 @@ in {
       };
 
       Install = {
-        WantedBy = [ "timers.target" ];
+        WantedBy = ["timers.target"];
       };
     };
 
     systemd.user.services.chromexup = {
       Unit = {
         Description = "External extension updater for Chromium based browsers";
-        After = [ "network-online.target" "psd-resync.service" ];
-        Wants = [ "network-online.target" ];
+        After = ["network-online.target" "psd-resync.service"];
+        Wants = ["network-online.target"];
       };
 
       Service = {
@@ -80,4 +86,3 @@ in {
     };
   };
 }
-
