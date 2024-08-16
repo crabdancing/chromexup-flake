@@ -63,6 +63,7 @@ in {
       };
 
       Timer = {
+        OnActiveSec = 10;
         OnCalendar = "daily";
         Persistent = true;
       };
