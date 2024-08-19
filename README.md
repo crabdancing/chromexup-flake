@@ -49,7 +49,7 @@ home-manager.red.programs.chromexup = {
 - Q: Do you accept PRs?
 - A: Yes!
 - Q: Where do I get the ID of the extension?
-- A: E.g., if you search `uBlock Origin` on the [Chrome Web Store](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm), it gives you: https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
+- A: E.g., if you search `uBlock Origin` on the [Chrome Web Store](https://chromewebstore.google.com), it gives you: https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
 - A: Therefore, the ID is: `cjpalhdlnbpafiamejdnhcphjbkeiagm`
 
 This will also automatically enable a systemd service & timer, so it will automatically run daily!
