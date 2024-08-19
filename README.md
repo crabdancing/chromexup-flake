@@ -1,6 +1,6 @@
 # chromexup for NixOS
 
-In the mess that is the modern browser ecosystem, `ungoogled-chromium` is a fairly solid browser choice. It's well funded, meaning the feature set & security is fairly on point -- but it's also a fork with all Google's creepy stuff removed. Awesome!
+In the mess that is the modern browser ecosystem, [ungoogled-chromium](https://github.com/ungoogled-software/ungoogled-chromium) is a fairly solid browser choice. It's well funded, meaning the feature set & security is fairly on point -- but it's also a fork with all Google's creepy stuff removed. Awesome!
 
 There's a problem though.
 
