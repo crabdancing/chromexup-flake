@@ -9,6 +9,7 @@ pkgs.python3Packages.buildPythonApplication {
   src = chromexup-src;
   propagatedBuildInputs = with pkgs.python3Packages; [requests];
   build-system = with python3Packages; [setuptools];
+  pyproject = true;
   # You may need to add more Python dependencies depending on the actual needs
   # You could also override 'doCheck' and other attributes as required
 }
